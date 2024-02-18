@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Determining workspace structure
 
-## Getting Started
+Deciding which workspace information to collect
 
-First, run the development server:
+Gathering workspace info
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# NextJS with Passage Identity Demo App
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This is a demo application showcasing how to integrate Passage Identity with a NextJS application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The project is structured as follows:
 
-## Learn More
+- [`src/`](./src/): Contains the source code of the application.
+  - `app/`: Contains the main application components.
+    - `login/`: Contains the login page component.
+    - `page.tsx`: The main page component.
+    - `layout.tsx`: The main layout component.
+  - `hooks/`: Contains custom React hooks.
+    - `useCurrentUser.ts`: A custom hook for accessing the current user's data.
+- [`.env`](./.env): Contains environment variables. You need to set up the environment variables for the Passage App ID and API Key.
 
-To learn more about Next.js, take a look at the following resources:
+## Key Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- User authentication using Passage Identity.
+- Custom React hook for accessing the current user's data.
+- Protected routes that require user authentication. (TODO)
+- Middleware for checking user authentication. (TODO)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Setup
 
-## Deploy on Vercel
+1. Clone the repository.
+2. Install the dependencies using `npm install`.
+3. Set up the environment variables in the [`.env`](./.env) file:
+   - `PASSAGE_APP_ID`: Your Passage App ID.
+   - `PASSAGE_API_KEY`: Your Passage API Key.
+4. Run the application in development mode using `npm run dev`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+When you run the application, you will be redirected to the login page if you are not authenticated. After successful authentication, you will be redirected to the main page where you can see a welcome message with your username.
+
+## Notes
+For chrome to work with passkeys you must run the server with TLS.
+
+## License
+
+This project is licensed under the MIT License.
