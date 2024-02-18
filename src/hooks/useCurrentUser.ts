@@ -5,6 +5,7 @@ type CurrentUser = {
     isLoading: boolean;
     isAuthorized: boolean;
     username: string;
+    signOut: () => void;
 };
 
 export function useCurrentUser() {
@@ -12,19 +13,24 @@ export function useCurrentUser() {
         isLoading: true,
         isAuthorized: false,
         username: '',
+        signOut: () => {
+            throw new Error('Not implemented');
+        }
     });
 
     useEffect(() => {
         let cancelRequest = false;
-        let user = undefined;
+        let user: PassageUser | null = null;
         try {
             user = new PassageUser();
         } catch (e) {
             setResult({
                 isLoading: false,
                 isAuthorized: false,
-                username: ''
-                ,
+                username: '',
+                signOut: () => {
+                    throw new Error('Not implemented');
+                }
             });
             return () => {
                 cancelRequest = true;
@@ -39,14 +45,19 @@ export function useCurrentUser() {
                     isLoading: false,
                     isAuthorized: false,
                     username: "",
+                    signOut: () => {
+                        throw new Error('Not implemented');
+                    }
                 });
                 return;
             }
             setResult({
                 isLoading: false,
                 isAuthorized: true,
-                username: userInfo.email ? userInfo.email : userInfo.phone
-                ,
+                username: userInfo.email ? userInfo.email : userInfo.phone,
+                signOut: () => {
+                    user?.signOut();
+                }
             });
         });
         return () => {
